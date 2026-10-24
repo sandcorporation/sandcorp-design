@@ -1,6 +1,6 @@
 /* Class components. No JS needed. Colors only via var(--color-*). Hairlines, no cards/shadows. */
 
-.visually-hidden {
+.sc-visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -13,7 +13,7 @@
 }
 
 /* Mono uppercase label: section heads, meta. */
-.label {
+.sc-label {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
@@ -23,11 +23,11 @@
 
 /* ---------- section ---------- */
 
-.section {
+.sc-section {
   margin-top: var(--section-gap);
 }
 
-.section-head {
+.sc-section-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -36,7 +36,7 @@
   border-bottom: 1px solid var(--color-line-strong);
 }
 
-.section-title {
+.sc-section-title {
   font-size: var(--text-h2);
   font-weight: 700;
   letter-spacing: -0.015em;
@@ -46,11 +46,11 @@
 
 /* ---------- masthead ---------- */
 
-.masthead {
+.sc-masthead {
   padding: 0 var(--gutter);
 }
 
-.masthead-row {
+.sc-masthead-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -60,7 +60,7 @@
   border-bottom: 1px solid var(--color-line-strong);
 }
 
-.brand {
+.sc-brand {
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -68,7 +68,7 @@
   text-decoration: none;
 }
 
-.masthead-meta {
+.sc-masthead-meta {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
@@ -76,11 +76,11 @@
   color: var(--color-muted);
 }
 
-.masthead-meta a {
+.sc-masthead-meta a {
   color: var(--color-ink);
 }
 
-.nav {
+.sc-nav {
   display: flex;
   gap: 1.75rem;
   padding: 0.9rem 0;
@@ -90,7 +90,7 @@
   border-bottom: 1px solid var(--color-line);
 }
 
-.nav a {
+.sc-nav a {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
@@ -99,12 +99,12 @@
   text-decoration: none;
 }
 
-.nav a:hover,
-.nav a[aria-current] {
+.sc-nav a:hover,
+.sc-nav a[aria-current] {
   color: var(--color-ink);
 }
 
-.nav a[aria-current] {
+.sc-nav a[aria-current] {
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.5em;
@@ -112,7 +112,7 @@
 
 /* ---------- button ---------- */
 
-.btn {
+.sc-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -130,48 +130,48 @@
   cursor: pointer;
 }
 
-.btn:hover {
+.sc-btn:hover {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: var(--color-on-accent);
 }
 
-.btn--accent {
+.sc-btn--accent {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: var(--color-on-accent);
 }
 
-.btn--accent:hover {
+.sc-btn--accent:hover {
   background: var(--color-ink);
   border-color: var(--color-ink);
   color: var(--color-canvas);
 }
 
-.btn--secondary {
+.sc-btn--secondary {
   background: transparent;
   color: var(--color-ink);
 }
 
-.btn--secondary:hover {
+.sc-btn--secondary:hover {
   background: var(--color-tint);
   border-color: var(--color-ink);
   color: var(--color-ink);
 }
 
-.btn--block {
+.sc-btn--block {
   display: flex;
   width: 100%;
 }
 
-.btn--sm {
+.sc-btn--sm {
   min-height: 2.25rem;
   padding: 0.35rem 0.9rem;
   font-size: 0.875rem;
 }
 
-.btn[disabled],
-.btn[aria-disabled="true"] {
+.sc-btn[disabled],
+.sc-btn[aria-disabled="true"] {
   background: var(--color-tint);
   border-color: var(--color-line);
   color: var(--color-muted);
@@ -180,16 +180,16 @@
 
 /* ---------- form fields ---------- */
 
-.field {
+.sc-field {
   display: grid;
   gap: 0.4rem;
 }
 
-.field + .field {
+.sc-field + .sc-field {
   margin-top: 1.25rem;
 }
 
-.field-label {
+.sc-field-label {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
@@ -197,7 +197,7 @@
   color: var(--color-ink);
 }
 
-.input {
+.sc-input {
   width: 100%;
   min-height: 2.75rem;
   padding: 0.55rem 0.75rem;
@@ -208,52 +208,52 @@
   font: inherit;
 }
 
-.input::placeholder {
+.sc-input::placeholder {
   color: var(--color-muted);
   opacity: 1;
 }
 
-.input:hover {
+.sc-input:hover {
   border-color: var(--color-accent);
 }
 
-.input:focus-visible {
+.sc-input:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 1px;
   border-color: var(--color-focus);
 }
 
-.input[disabled] {
+.sc-input[disabled] {
   background: var(--color-tint);
   color: var(--color-muted);
   cursor: not-allowed;
 }
 
-.input[aria-invalid="true"],
-.field--error .input {
+.sc-input[aria-invalid="true"],
+.sc-field--error .sc-input {
   border-color: var(--color-danger);
 }
 
-.field-hint {
+.sc-field-hint {
   font-size: 0.875rem;
   color: var(--color-muted);
 }
 
-.field-error {
+.sc-field-error {
   font-size: 0.875rem;
   color: var(--color-danger);
 }
 
 /* ---------- hairline list ---------- */
 
-.list {
+.sc-list {
   margin: 0;
   padding: 0;
   list-style: none;
   border-top: 1px solid var(--color-line-strong);
 }
 
-.list > li {
+.sc-list > li {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -263,30 +263,30 @@
   border-bottom: 1px solid var(--color-line);
 }
 
-.list-title {
+.sc-list-title {
   color: var(--color-ink);
   font-weight: 600;
 }
 
-.list-meta {
+.sc-list-meta {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   letter-spacing: 0.04em;
   color: var(--color-muted);
 }
 
-a.list-title {
+a.sc-list-title {
   text-decoration: none;
 }
 
-a.list-title:hover {
+a.sc-list-title:hover {
   color: var(--color-accent);
   text-decoration: underline;
 }
 
 /* ---------- alert ---------- */
 
-.alert {
+.sc-alert {
   padding: 0.75rem 1rem;
   border-top: 1px solid var(--color-line);
   border-bottom: 1px solid var(--color-line);
@@ -295,13 +295,13 @@ a.list-title:hover {
   color: var(--color-text);
 }
 
-.alert--error {
+.sc-alert--error {
   border-left-color: var(--color-danger);
   background: var(--color-tint);
   color: var(--color-danger);
 }
 
-.alert-title {
+.sc-alert-title {
   display: block;
   font-weight: 700;
   color: inherit;
@@ -309,7 +309,7 @@ a.list-title:hover {
 
 /* ---------- social login buttons (brand rules: shape, symbol, colors fixed) ---------- */
 
-.btn-social {
+.sc-btn-social {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -325,40 +325,40 @@ a.list-title:hover {
   cursor: pointer;
 }
 
-.btn-social svg {
+.sc-btn-social svg {
   flex: none;
   width: 18px;
   height: 18px;
 }
 
 /* Google: 1px inside stroke, light/dark variant follows the color scheme. */
-.btn-google {
+.sc-btn-google {
   border: 1px solid var(--color-google-line);
   border-radius: var(--radius);
   background: var(--color-google-bg);
   color: var(--color-google-text);
 }
 
-.btn-google:hover {
+.sc-btn-google:hover {
   filter: brightness(0.96);
 }
 
 /* Kakao: yellow fill token, symbol black, label black 85%, radius 12px. */
-.btn-kakao {
+.sc-btn-kakao {
   border: 0;
   border-radius: 12px;
   background: var(--color-kakao-bg);
   color: var(--color-kakao-text);
 }
 
-.btn-kakao svg {
+.sc-btn-kakao svg {
   fill: var(--color-kakao-symbol);
 }
 
-.btn-kakao:hover {
+.sc-btn-kakao:hover {
   filter: brightness(0.96);
 }
 
-.btn-social:focus-visible {
+.sc-btn-social:focus-visible {
   outline-offset: 3px;
 }
