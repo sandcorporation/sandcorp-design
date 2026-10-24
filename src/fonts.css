@@ -1,0 +1,8 @@
+/*
+ * Self-hosted fonts for Vite apps (no external requests). Import once in the app entry:
+ *   import "sandcorp-design/fonts.css";
+ * Not part of dist/sandcorp.css: Pretendard's dynamic subset is hundreds of woff2 files.
+ * Without it the --font-sans stack falls back to system Korean fonts.
+ */
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
