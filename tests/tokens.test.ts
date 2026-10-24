@@ -129,6 +129,30 @@ describe("line-strong follows ink (Foresight #88)", () => {
   });
 });
 
+describe("class prefix", () => {
+  // Every class selector in src (outside tokens) must start with sc-.
+  it("src has no unprefixed class selectors", () => {
+    const offenders: string[] = [];
+    for (const [file, text] of Object.entries(sources)) {
+      if (!file.endsWith(".css")) continue;
+      const code = text.replace(/\/\*[\s\S]*?\*\//g, "").replace(/"[^"]*"/g, '""');
+      for (const [, name] of code.matchAll(/\.(-?[a-zA-Z_][\w-]*)/g)) {
+        if (name && !name.startsWith("sc-")) offenders.push(`${file}: .${name}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it("dist has no unprefixed class selectors", () => {
+    const css = readFileSync(join(ROOT, "dist", "sandcorp.css"), "utf8");
+    const code = css.replace(/"[^"]*"/g, '""');
+    const offenders = [...code.matchAll(/\.(-?[a-zA-Z_][\w-]*)/g)]
+      .map((m) => m[1])
+      .filter((name) => name && !name.startsWith("sc-"));
+    expect(offenders).toEqual([]);
+  });
+});
+
 describe("dist", () => {
   const dist = readFileSync(join(ROOT, "dist", "sandcorp.css"), "utf8");
 

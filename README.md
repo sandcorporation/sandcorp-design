@@ -19,7 +19,7 @@ React 컴포넌트는 넣지 않는다. Flow의 산업용 테마도 넣지 않�
 ### Vite 앱
 
 ```sh
-pnpm add github:sandcorporation/sandcorp-design#v0.2.0
+pnpm add github:sandcorporation/sandcorp-design#v0.3.0
 ```
 
 ```ts
@@ -35,9 +35,9 @@ import "sandcorp-design/fonts.css"; // 글꼴(외부 요청 없음)
 
 ```sh
 #!/usr/bin/env bash
-# 사용: scripts/sync-design.sh v0.2.0
+# 사용: scripts/sync-design.sh v0.3.0
 set -euo pipefail
-TAG="${1:?태그 필요 (예: v0.2.0)}"
+TAG="${1:?태그 필요 (예: v0.3.0)}"
 DEST="backend/static/design"   # 앱의 static 경로로 바꾼다
 mkdir -p "$DEST"
 curl -fsSL "https://raw.githubusercontent.com/sandcorporation/sandcorp-design/${TAG}/dist/sandcorp.css" \
@@ -47,28 +47,28 @@ echo "${TAG}" > "${DEST}/VERSION"
 
 템플릿에서는 `<link rel="stylesheet" href="{% static 'design/sandcorp.css' %}">`. 복사한 파일은 커밋하고, 올릴 때는 태그만 바꿔 다시 돌린다.
 
-## 클래스 컴포넌트 (v0.2.0)
+## 클래스 컴포넌트 (v0.3.0)
 
-모두 JS 없이 동작한다(견본: `examples/index.html`). 색은 토큰만 쓴다.
+모든 클래스는 `sc-` 접두사가 붙는다(소비 앱 클래스와 충돌 방지, v0.2.0의 접두사 없는 이름은 폐기). 모두 JS 없이 동작한다(견본: `examples/index.html`). 색은 토큰만 쓴다.
 
-| 클래스                                                                                  | 용도                                                    |
-| --------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| `.label`                                                                                | 모노 대문자 라벨                                        |
-| `.section` / `.section-head` / `.section-title`                                         | 섹션 문법(위 여백, 굵은 hairline 머리)                  |
-| `.masthead` > `.masthead-row` (`.brand`, `.masthead-meta`) + `.nav` (`a[aria-current]`) | 머리띠와 내비                                           |
-| `.btn` (+ `--accent` `--secondary` `--sm` `--block`, `disabled`)                        | 버튼. 기본은 ink 바탕                                   |
-| `.field` > `.field-label` + `.input` + `.field-hint`/`.field-error`                     | 입력. 오류는 `aria-invalid="true"` 또는 `.field--error` |
-| `.list` > `li` (`.list-title`, `.list-meta`)                                            | hairline 목록                                           |
-| `.alert` (+ `--error`), `.alert-title`                                                  | 알림. 안내는 `role="status"`, 오류는 `role="alert"`     |
-| `.btn-social.btn-google`, `.btn-social.btn-kakao`                                       | 소셜 로그인 버튼                                        |
-| `.visually-hidden`                                                                      | 화면 밖 텍스트                                          |
+| 클래스                                                                                                 | 용도                                                       |
+| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
+| `.sc-label`                                                                                            | 모노 대문자 라벨                                           |
+| `.sc-section` / `.sc-section-head` / `.sc-section-title`                                               | 섹션 문법(위 여백, 굵은 hairline 머리)                     |
+| `.sc-masthead` > `.sc-masthead-row` (`.sc-brand`, `.sc-masthead-meta`) + `.sc-nav` (`a[aria-current]`) | 머리띠와 내비                                              |
+| `.sc-btn` (+ `--accent` `--secondary` `--sm` `--block`, `disabled`)                                    | 버튼. 기본은 ink 바탕                                      |
+| `.sc-field` > `.sc-field-label` + `.sc-input` + `.sc-field-hint`/`.sc-field-error`                     | 입력. 오류는 `aria-invalid="true"` 또는 `.sc-field--error` |
+| `.sc-list` > `li` (`.sc-list-title`, `.sc-list-meta`)                                                  | hairline 목록                                              |
+| `.sc-alert` (+ `--error`), `.sc-alert-title`                                                           | 알림. 안내는 `role="status"`, 오류는 `role="alert"`        |
+| `.sc-btn-social.sc-btn-google`, `.sc-btn-social.sc-btn-kakao`                                          | 소셜 로그인 버튼                                           |
+| `.sc-visually-hidden`                                                                                  | 화면 밖 텍스트                                             |
 
 ### 소셜 로그인 버튼
 
 - Google: [Sign in with Google 브랜딩 지침](https://developers.google.com/identity/branding-guidelines) 값(라이트 `#FFFFFF`/선 `#747775`/글자 `#1F1F1F`, 다크 `#131314`/`#8E918F`/`#E3E3E3`, 1px 안쪽 선, 14/20 medium)을 `--color-google-*` 토큰으로 두고 색 구성표에 따라 라이트·다크 변형이 바뀐다. 문구는 「Google로 계속하기」. G 로고는 항상 4색.
 - Kakao: [카카오 로그인 디자인 가이드](https://developers.kakao.com/docs/ko/kakaologin/design-guide) 값(배경 `#FEE500`, 심볼 `#000000`, 글자 검정 85%, 모서리 12px)을 `--color-kakao-*` 토큰으로 둔다. 문구는 「카카오 로그인」(축약 「로그인」).
 - 로고 SVG 출처: 두 지침 모두 SVG 경로를 문서에 싣지 않는다. 견본의 Google G는 구글 공개 G 로고 4색 경로를, Kakao 말풍선은 가이드 모양을 따라 그린 것이다. 브랜드 심사가 필요하면 각 가이드의 공식 다운로드(Google 번들, 카카오 개발자 도구 > 리소스 다운로드)로 바꿔 끼운다. 비율·색은 바꾸지 않는다.
-- `.btn-social`은 폭 100%다. 앱이 감싸서 폭을 정한다.
+- `.sc-btn-social`은 폭 100%다. 앱이 감싸서 폭을 정한다.
 
 ### 글꼴
 
