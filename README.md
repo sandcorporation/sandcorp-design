@@ -19,7 +19,7 @@ React 컴포넌트는 넣지 않는다. Flow의 산업용 테마도 넣지 않�
 ### Vite 앱
 
 ```sh
-pnpm add github:sandcorporation/sandcorp-design#v0.3.0
+pnpm add github:sandcorporation/sandcorp-design#v0.3.1
 ```
 
 ```ts
@@ -35,9 +35,9 @@ import "sandcorp-design/fonts.css"; // 글꼴(외부 요청 없음)
 
 ```sh
 #!/usr/bin/env bash
-# 사용: scripts/sync-design.sh v0.3.0
+# 사용: scripts/sync-design.sh v0.3.1
 set -euo pipefail
-TAG="${1:?태그 필요 (예: v0.3.0)}"
+TAG="${1:?태그 필요 (예: v0.3.1)}"
 DEST="backend/static/design"   # 앱의 static 경로로 바꾼다
 mkdir -p "$DEST"
 curl -fsSL "https://raw.githubusercontent.com/sandcorporation/sandcorp-design/${TAG}/dist/sandcorp.css" \
@@ -47,7 +47,7 @@ echo "${TAG}" > "${DEST}/VERSION"
 
 템플릿에서는 `<link rel="stylesheet" href="{% static 'design/sandcorp.css' %}">`. 복사한 파일은 커밋하고, 올릴 때는 태그만 바꿔 다시 돌린다.
 
-## 클래스 컴포넌트 (v0.3.0)
+## 클래스 컴포넌트 (v0.3.1)
 
 모든 클래스는 `sc-` 접두사가 붙는다(소비 앱 클래스와 충돌 방지, v0.2.0의 접두사 없는 이름은 폐기). 모두 JS 없이 동작한다(견본: `examples/index.html`). 색은 토큰만 쓴다.
 
