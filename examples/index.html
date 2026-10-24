@@ -12,13 +12,6 @@
         margin: 0 auto;
         padding: var(--section-gap) var(--gutter);
       }
-      .label {
-        font-family: var(--font-mono);
-        font-size: var(--text-label);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--color-muted);
-      }
       .row {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
@@ -59,7 +52,7 @@
   </head>
   <body>
     <main>
-      <p class="label">sandcorp-design v0.1.0</p>
+      <p class="label">sandcorp-design v0.2.0</p>
       <h1 style="font-size: var(--text-display)">Sandcorp</h1>
       <p style="max-width: var(--measure); margin-top: 1rem">
         흰색·검정·네이비. 본문은 <a href="#">링크</a>를 포함하고, 키보드 포커스는 Tab으로 확인한다.
@@ -92,6 +85,118 @@
           <span style="color: var(--color-cat-ai)">AI 분야색</span> ·
           <span style="color: var(--color-cat-it)">IT 분야색</span>
         </p>
+      </section>
+      <section class="section">
+        <p class="label">Masthead · Nav</p>
+        <header class="masthead" style="padding: 0; margin-top: 1rem">
+          <div class="masthead-row">
+            <a class="brand" href="#">Sandcorp</a>
+            <p class="masthead-meta">2026년 10월 24일 · <a href="#">로그인</a></p>
+          </div>
+          <nav class="nav" aria-label="견본 내비">
+            <a href="#" aria-current="page">홈</a><a href="#">서비스</a><a href="#">문서</a>
+            <a href="#">문의</a>
+          </nav>
+        </header>
+      </section>
+      <section class="section">
+        <p class="label">Button</p>
+        <p style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem">
+          <a class="btn" href="#">기본</a>
+          <a class="btn btn--accent" href="#">강조</a>
+          <button class="btn btn--secondary" type="button">보조</button>
+          <button class="btn btn--sm" type="button">작게</button>
+          <button class="btn" type="button" disabled>비활성</button>
+        </p>
+        <p style="margin-top: 0.75rem; max-width: 24rem">
+          <button class="btn btn--accent btn--block" type="submit">전체 폭</button>
+        </p>
+      </section>
+      <section class="section">
+        <p class="label">Input</p>
+        <form style="max-width: 24rem; margin-top: 1rem" onsubmit="return false;">
+          <div class="field">
+            <label class="field-label" for="e1">이메일</label>
+            <input class="input" id="e1" type="email" placeholder="you@sandcorp.co.kr" />
+            <span class="field-hint">로그인에 쓰는 주소</span>
+          </div>
+          <div class="field field--error">
+            <label class="field-label" for="e2">비밀번호</label>
+            <input
+              class="input"
+              id="e2"
+              type="password"
+              aria-invalid="true"
+              aria-describedby="e2err"
+              value="x"
+            />
+            <span class="field-error" id="e2err">8자 이상이어야 합니다.</span>
+          </div>
+          <div class="field">
+            <label class="field-label" for="e3">비활성</label>
+            <input class="input" id="e3" disabled value="수정할 수 없음" />
+          </div>
+        </form>
+      </section>
+      <section class="section">
+        <p class="label">Hairline list</p>
+        <ul class="list" style="margin-top: 1rem">
+          <li>
+            <a class="list-title" href="#">연결된 앱 Foresight</a
+            ><span class="list-meta">2026-10-24</span>
+          </li>
+          <li>
+            <span class="list-title">연결된 앱 Portfolio</span
+            ><span class="list-meta">2026-10-20</span>
+          </li>
+          <li>
+            <span class="list-title">긴 제목이 좁은 화면에서 줄바꿈되어도 구분선은 유지된다</span
+            ><span class="list-meta">2026-10-01</span>
+          </li>
+        </ul>
+      </section>
+      <section class="section">
+        <p class="label">Alert</p>
+        <div style="display: grid; gap: 0.75rem; margin-top: 1rem">
+          <div class="alert" role="status">
+            <span class="alert-title">안내</span>메일로 확인 링크를 보냈습니다.
+          </div>
+          <div class="alert alert--error" role="alert">
+            <span class="alert-title">오류</span>이메일 또는 비밀번호가 맞지 않습니다.
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <p class="label">Social login</p>
+        <div style="display: grid; gap: 0.75rem; max-width: 24rem; margin-top: 1rem">
+          <a class="btn-social btn-google" href="#"
+            ><svg viewBox="0 0 48 48" aria-hidden="true">
+              <path
+                fill="#EA4335"
+                d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+              />
+              <path
+                fill="#4285F4"
+                d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+              />
+              <path
+                fill="#FBBC05"
+                d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+              />
+              <path
+                fill="#34A853"
+                d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+              /></svg
+            ><span>Google로 계속하기</span></a
+          >
+          <a class="btn-social btn-kakao" href="#"
+            ><svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 3C6.2 3 1.5 6.7 1.5 11.3c0 3 2 5.6 5 7.1l-.9 3.4c-.1.4.3.7.7.5l4.1-2.7c.5.1 1.1.1 1.6.1 5.8 0 10.5-3.7 10.5-8.3S17.8 3 12 3z"
+              /></svg
+            ><span>카카오 로그인</span></a
+          >
+        </div>
       </section>
     </main>
     <script>
