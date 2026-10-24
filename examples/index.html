@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>sandcorp-design 견본</title>
+    <link rel="stylesheet" href="../dist/sandcorp.css" />
+    <style>
+      /* 견본 배치용. 색은 토큰만 쓴다. */
+      main {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: var(--section-gap) var(--gutter);
+      }
+      .label {
+        font-family: var(--font-mono);
+        font-size: var(--text-label);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--color-muted);
+      }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+        gap: 0;
+        border-top: 1px solid var(--color-line);
+        margin-top: 1rem;
+      }
+      .sw {
+        padding: 1rem;
+        border-bottom: 1px solid var(--color-line);
+        border-right: 1px solid var(--color-line);
+        font-family: var(--font-mono);
+        font-size: var(--text-label);
+      }
+      .sw i {
+        display: block;
+        height: 2.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid var(--color-line-strong);
+      }
+      section {
+        margin-top: var(--section-gap);
+      }
+      .cta {
+        display: inline-block;
+        padding: 0.6rem 1.2rem;
+        background: var(--color-accent);
+        color: var(--color-on-accent);
+        text-decoration: none;
+        border-radius: var(--radius);
+      }
+      .tint {
+        background: var(--color-accent-tint);
+        padding: 1rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="label">sandcorp-design v0.1.0</p>
+      <h1 style="font-size: var(--text-display)">Sandcorp</h1>
+      <p style="max-width: var(--measure); margin-top: 1rem">
+        흰색·검정·네이비. 본문은 <a href="#">링크</a>를 포함하고, 키보드 포커스는 Tab으로 확인한다.
+        <span style="color: var(--color-muted)">보조 텍스트</span>
+        <span style="color: var(--color-danger)">오류 텍스트</span>
+      </p>
+      <section>
+        <p class="label">Type</p>
+        <h2 style="font-size: var(--text-hero)">히어로 제목 Hero heading</h2>
+        <h2 style="font-size: var(--text-h2); margin-top: 1rem">섹션 제목 Section heading</h2>
+        <p
+          style="
+            font-size: var(--text-metric);
+            font-family: var(--font-mono);
+            color: var(--color-ink);
+          "
+        >
+          128.4
+        </p>
+        <code>--font-mono 0123456789</code>
+      </section>
+      <section>
+        <p class="label">Color</p>
+        <div class="row" id="swatches"></div>
+        <p style="margin-top: 1.5rem"><a class="cta" href="#">강조 버튼</a></p>
+        <div class="tint">
+          <span style="color: var(--color-accent)">강조</span> / 강조 배경 위 텍스트
+        </div>
+        <p style="margin-top: 1rem">
+          <span style="color: var(--color-cat-ai)">AI 분야색</span> ·
+          <span style="color: var(--color-cat-it)">IT 분야색</span>
+        </p>
+      </section>
+    </main>
+    <script>
+      const names = [
+        "canvas",
+        "paper",
+        "tint",
+        "line",
+        "line-strong",
+        "ink",
+        "text",
+        "muted",
+        "accent",
+        "accent-tint",
+        "on-accent",
+        "focus",
+        "danger",
+        "cat-ai",
+        "cat-it",
+      ];
+      document.getElementById("swatches").innerHTML = names
+        .map(
+          (n) => `<div class="sw"><i style="background: var(--color-${n})"></i>--color-${n}</div>`,
+        )
+        .join("");
+    </script>
+  </body>
+</html>
