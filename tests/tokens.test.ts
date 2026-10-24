@@ -98,6 +98,37 @@ describe.each(["light", "dark"] as const)("contrast (%s)", (scheme) => {
   });
 });
 
+describe.each(["light", "dark"] as const)("social buttons (%s)", (scheme) => {
+  const t = { ...tokens("light"), ...tokens(scheme) };
+  const get = (name: string) => t[name] ?? "";
+
+  it("Google label is >= 4.5:1 on its fill", () => {
+    expect(contrast(get("color-google-text"), get("color-google-bg"))).toBeGreaterThanOrEqual(4.5);
+  });
+
+  it("Kakao label (black 85%) is >= 4.5:1 on yellow", () => {
+    // black at 85% over the fill: each channel * 0.15
+    const bg = get("color-kakao-bg");
+    const blended =
+      "#" +
+      [1, 3, 5]
+        .map((i) =>
+          Math.round(parseInt(bg.slice(i, i + 2), 16) * 0.15)
+            .toString(16)
+            .padStart(2, "0"),
+        )
+        .join("");
+    expect(contrast(blended, bg)).toBeGreaterThanOrEqual(4.5);
+  });
+});
+
+describe("line-strong follows ink (Foresight #88)", () => {
+  it.each(["light", "dark"] as const)("%s", (scheme) => {
+    const t = { ...tokens("light"), ...tokens(scheme) };
+    expect(t["color-line-strong"]).toBe(t["color-ink"]);
+  });
+});
+
 describe("dist", () => {
   const dist = readFileSync(join(ROOT, "dist", "sandcorp.css"), "utf8");
 
