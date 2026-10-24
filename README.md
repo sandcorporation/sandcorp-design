@@ -65,9 +65,9 @@ echo "${TAG}" > "${DEST}/VERSION"
 
 ### 소셜 로그인 버튼
 
-- Google: [Sign in with Google 브랜딩 지침](https://developers.google.com/identity/branding-guidelines) 값(라이트 `#FFFFFF`/선 `#747775`/글자 `#1F1F1F`, 다크 `#131314`/`#8E918F`/`#E3E3E3`, 1px 안쪽 선, 14/20 medium)을 `--color-google-*` 토큰으로 두고 색 구성표에 따라 라이트·다크 변형이 바뀐다. 문구는 「Google로 계속하기」. G 로고는 항상 4색.
-- Kakao: [카카오 로그인 디자인 가이드](https://developers.kakao.com/docs/ko/kakaologin/design-guide) 값(배경 `#FEE500`, 심볼 `#000000`, 글자 검정 85%, 모서리 12px)을 `--color-kakao-*` 토큰으로 둔다. 문구는 「카카오 로그인」(축약 「로그인」).
-- 로고 SVG 출처: 두 지침 모두 SVG 경로를 문서에 싣지 않는다. 견본의 Google G는 구글 공개 G 로고 4색 경로를, Kakao 말풍선은 가이드 모양을 따라 그린 것이다. 브랜드 심사가 필요하면 각 가이드의 공식 다운로드(Google 번들, 카카오 개발자 도구 > 리소스 다운로드)로 바꿔 끼운다. 비율·색은 바꾸지 않는다.
+- Google: [Sign in with Google 브랜딩 지침](https://developers.google.com/identity/branding-guidelines) 값(라이트 `#FFFFFF`/선 `#747775`/글자 `#1F1F1F`, 다크 `#131314`/`#8E918F`/`#E3E3E3`, 1px 안쪽 선, 14/20 medium)을 `--color-google-*` 토큰으로 두고 색 구성표에 따라 라이트·다크 변형이 바뀐다. 문구는 「Google로 계속하기」. G 로고는 공식 번들 그대로(색 변형 없음).
+- Kakao: [카카오 로그인 디자인 가이드](https://developers.kakao.com/docs/ko/kakaologin/design-guide) 값(배경 `#FEE500`, 심볼 `#000000` 85% 투명도, 글자 검정 85%, 모서리 12px)을 `--color-kakao-*` 토큰으로 둔다. 문구는 「카카오 로그인」(축약 「로그인」).
+- 로고 SVG 출처(공식 파일, 2026-10-24 받음): Google G는 [Sign in with Google 브랜딩 번들](https://developers.google.com/static/identity/images/signin-assets.zip)(Android + Web/Light/Square, 글자 없음)에서 배경을 빼고 G만 인라인한 것이다(그라디언트 G, 4색 단색 경로 아님). Kakao 심볼은 [카카오 개발자 도구 > 리소스 다운로드](https://developers.kakao.com/tool/resource/login)의 `Kakao Login.zip` SVG(`kakao_login_kr_medium.svg`)에서 말풍선 경로만 잘라 viewBox를 맞춘 것이다. 각 사의 상표 사용 지침을 지키는 조건이며 비율·색은 바꾸지 않는다.
 - `.sc-btn-social`은 폭 100%다. 앱이 감싸서 폭을 정한다.
 
 ### 글꼴
