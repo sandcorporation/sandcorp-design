@@ -353,6 +353,7 @@ a.sc-list-title:hover {
 
 .sc-btn-kakao svg {
   fill: var(--color-kakao-symbol);
+  fill-opacity: 0.85;
 }
 
 .sc-btn-kakao:hover {
