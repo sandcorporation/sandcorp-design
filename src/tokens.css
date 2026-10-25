@@ -30,6 +30,11 @@
   /* categories (muted; tone-ai / tone-it) */
   --color-cat-ai: #2f5586;
   --color-cat-it: #1d6650;
+  /* brand mark (logo/icons in assets/ copy these literals; tests keep them in sync) */
+  --color-brand-ink: #1b1d24;
+  --color-brand-sand: #f1eee6;
+  --color-brand-dune-far: #8a6214;
+  --color-brand-dune-near: #d9ad4c;
   /* social login buttons: brand-mandated, do not restyle. Google follows its light/dark
      variants with the scheme; Kakao is the same in both. */
   --color-google-bg: #ffffff;
