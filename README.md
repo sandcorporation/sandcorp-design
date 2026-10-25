@@ -76,6 +76,27 @@ echo "${TAG}" > "${DEST}/VERSION"
 - Vite 앱: `sandcorp-design/fonts.css`가 npm `pretendard`·`@fontsource-variable/jetbrains-mono`를 import해 번들한다.
 - Django 앱: 글꼴을 따로 싣지 않으면 `--font-sans` 스택이 시스템 한글 글꼴(Apple SD Gothic Neo, Malgun Gothic)로 떨어진다. 꼭 필요하면 앱이 `pretendard`(npm)의 `dist/web/variable/woff2-dynamic-subset/`와 JetBrains Mono 파일을 자기 static에 두고 `@font-face`를 쓴다. 필요가 생기면 이 저장소에 `dist/fonts/` 서브셋을 더하는 티켓을 만든다.
 
+## 로고·아이콘 (v0.4.0)
+
+`assets/`의 SVG·PNG·ICO. 원본 모양은 portfolio의 마크(정사각형 안의 모래언덕 둘, 32×32, rx 2)를 그대로 옮겼다.
+
+| 파일                                                | 용도                                                           |
+| --------------------------------------------------- | -------------------------------------------------------------- |
+| `assets/mark.svg`, `mark-dark.svg`                  | 마크만. `-dark`는 어두운 배경용(바탕을 `--color-brand-sand`로) |
+| `assets/logo.svg`, `logo-dark.svg`                  | 마크 + 「Sandcorp」(글꼴 Pretendard, 없으면 system-ui)         |
+| `assets/flow/icon.svg`                              | Flow 제품 아이콘(마크 + 흐름 선과 노드 둘)                     |
+| `assets/flow/favicon.svg`                           | Flow favicon. 다크 모드에서 바탕·단서 색이 뒤바뀐다            |
+| `assets/flow/favicon.ico` (16·32), `favicon-32.png` | 구형 브라우저·탭                                               |
+| `assets/flow/apple-touch-icon.png` (180)            | iOS 홈 화면(전면 채움, iOS가 모서리를 깎는다)                  |
+| `assets/flow/icon-192.png`, `icon-512.png`          | PWA, maskable(마크를 72%로 줄여 안전 영역 확보)                |
+| `assets/flow/site.webmanifest`                      | 예시. 앱이 name·색을 고쳐 쓴다                                 |
+
+사용: Vite는 `import mark from "sandcorp-design/assets/mark.svg"`. Django는 `scripts/sync-design.sh`처럼 `assets/`를 앱 static으로 복사한다. 태그로 고정한다.
+
+**색 예외**: CSS 원시 색은 `src/tokens.css`에만이라는 규칙은 그대로지만, SVG 자산은 단독 파일로 쓰이므로 리터럴 색을 품는다. 같은 값이 `--color-brand-ink`·`-sand`·`-dune-far`·`-dune-near` 토큰에 있고, 시험이 둘이 어긋나지 않는지 본다. 브랜드 색은 글자 색이 아니라 그림이라 4.5:1 대비 시험 대상이 아니다(글자에는 `--color-ink` 등을 쓴다).
+
+**제품 아이콘 규칙**(news·portfolio·metrics 등도 같게): `assets/<제품>/icon.svg` = 마크에 제품 단서 **하나**만 얹는다. 단서는 하늘 영역(위쪽 1/3)에 `--color-brand-sand` 색으로 두고, 두꺼운 선(2)과 큰 점(반지름 2.8)으로 16px에서도 읽히게 한다. `favicon.svg`는 같은 그림에 다크 모드 `@media`를 더한다. PNG·ICO는 `pnpm icons`(`scripts/icons.mjs`)가 `icon.svg`에서 만들고 커밋한다. Flow의 단서는 「꺾이는 흐름 선과 시작·끝 노드」: 곡선 단서는 16px에서 아령처럼 뭉쳐 보여 꺾이는 선으로 바꿨다.
+
 ## 버전 규칙
 
 semver 태그(`vX.Y.Z`). 토큰 이름을 바꾸거나 지우면 **major**, 토큰·클래스를 더하면 minor, 값만 고치면 patch(색 값은 대비 시험을 통과해야 한다). 소비자는 항상 태그로 고정한다.
@@ -83,5 +104,5 @@ semver 태그(`vX.Y.Z`). 토큰 이름을 바꾸거나 지우면 **major**, 토�
 
 ## 개발
 
-`CLAUDE.md` 참고. `pnpm check` = 빌드 → dist 변경 없음 확인 → 시험 → 포맷 검사.
+`CLAUDE.md` 참고. `pnpm check` = 빌드 → 아이콘 생성 → dist·assets 변경 없음 확인 → 시험 → 포맷 검사.
 `examples/index.html`은 `dist/sandcorp.css`만 붙인 견본이다.
