@@ -372,7 +372,7 @@ a.sc-list-title:hover {
   color: var(--color-text);
   font-size: var(--text-base);
   line-height: var(--leading);
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .sc-prose > :first-child {
@@ -476,13 +476,19 @@ a.sc-list-title:hover {
   background: none;
 }
 
-/* Wide tables scroll inside themselves instead of widening the page. */
-.sc-prose table {
-  display: block;
-  max-width: 100%;
+/* Tables: wrap each one in .sc-prose-table-scroll. Columns keep their width and the wrapper
+   scrolls sideways on a narrow screen (break-word never narrows a column below its longest word). */
+.sc-prose-table-scroll {
   margin: var(--space-4) 0;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  border-top: 1px solid var(--color-line-strong);
+}
+
+.sc-prose table {
+  width: 100%;
   border-collapse: collapse;
+  color: var(--color-ink);
   font-size: var(--text-sm);
   line-height: 1.7;
   font-variant-numeric: tabular-nums;
@@ -549,7 +555,7 @@ a.sc-list-title:hover {
   max-width: 100%;
 }
 
-/* Callout: 2px rule on the left; data-kind="warning" turns the rule accent. */
+/* Callout: 2px rule on the left; data-kind="warning" turns the rule and the kind label accent. */
 .sc-prose-callout {
   margin: var(--space-5) 0;
   padding: var(--space-1) 0 var(--space-1) var(--space-4);
@@ -568,16 +574,26 @@ a.sc-list-title:hover {
   margin-bottom: 0;
 }
 
+/* Title row: a kind label (info, warning ...) and an optional title next to it. */
 .sc-prose-callout-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-3);
   margin: 0 0 var(--space-1);
+}
+
+.sc-prose-callout-kind {
   color: var(--color-muted);
   font-family: var(--font-mono);
   font-size: var(--text-label);
+  font-weight: 500;
   letter-spacing: 0.08em;
+  line-height: 1.6;
   text-transform: uppercase;
 }
 
-.sc-prose-callout[data-kind="warning"] .sc-prose-callout-title {
+.sc-prose-callout[data-kind="warning"] .sc-prose-callout-kind {
   color: var(--color-accent);
 }
 

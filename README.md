@@ -11,6 +11,7 @@ React 컴포넌트는 넣지 않는다. Flow의 산업용 테마도 넣지 않�
 | `src/base.css`       | 리셋, 본문, 링크, 포커스 링                                           |
 | `src/components.css` | 클래스 컴포넌트(`.sc-prose` 본문 포함, 아래 목록)                     |
 | `src/index.css`      | 진입점(tokens + base + components)                                    |
+| `src/fallback.css`   | 대체 글꼴 metric `@font-face`(local() 전용, 번들에 들어감, v0.6.0)    |
 | `src/fonts.css`      | Pretendard·JetBrains Mono 자체 호스팅 import (Vite용, 번들에 안 넣음) |
 | `dist/sandcorp.css`  | 위를 하나로 묶고 압축한 것. **커밋한다**(빌드 없이 쓰려는 것)         |
 
@@ -51,18 +52,18 @@ echo "${TAG}" > "${DEST}/VERSION"
 
 모든 클래스는 `sc-` 접두사가 붙는다(소비 앱 클래스와 충돌 방지, v0.2.0의 접두사 없는 이름은 폐기). 모두 JS 없이 동작한다(견본: `examples/index.html`). 색은 토큰만 쓴다.
 
-| 클래스                                                                                                 | 용도                                                       |
-| ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------- |
-| `.sc-label`                                                                                            | 모노 대문자 라벨                                           |
-| `.sc-section` / `.sc-section-head` / `.sc-section-title`                                               | 섹션 문법(위 여백, 굵은 hairline 머리)                     |
-| `.sc-masthead` > `.sc-masthead-row` (`.sc-brand`, `.sc-masthead-meta`) + `.sc-nav` (`a[aria-current]`) | 머리띠와 내비                                              |
-| `.sc-btn` (+ `--accent` `--secondary` `--sm` `--block`, `disabled`)                                    | 버튼. 기본은 ink 바탕                                      |
-| `.sc-field` > `.sc-field-label` + `.sc-input` + `.sc-field-hint`/`.sc-field-error`                     | 입력. 오류는 `aria-invalid="true"` 또는 `.sc-field--error` |
-| `.sc-list` > `li` (`.sc-list-title`, `.sc-list-meta`)                                                  | hairline 목록                                              |
-| `.sc-alert` (+ `--error`), `.sc-alert-title`                                                           | 알림. 안내는 `role="status"`, 오류는 `role="alert"`        |
-| `.sc-btn-social.sc-btn-google`, `.sc-btn-social.sc-btn-kakao`                                          | 소셜 로그인 버튼                                           |
-| `.sc-visually-hidden`                                                                                  | 화면 밖 텍스트                                             |
-| `.sc-prose` (+ `.sc-prose-gallery`, `.sc-prose-callout`(`data-kind="warning"`), `.sc-prose-cover`)     | 본문 타이포그래피(v0.5.0). 이미지는 원본 비율·잘림 없음    |
+| 클래스                                                                                                 | 용도                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `.sc-label`                                                                                            | 모노 대문자 라벨                                                                                                                                             |
+| `.sc-section` / `.sc-section-head` / `.sc-section-title`                                               | 섹션 문법(위 여백, 굵은 hairline 머리)                                                                                                                       |
+| `.sc-masthead` > `.sc-masthead-row` (`.sc-brand`, `.sc-masthead-meta`) + `.sc-nav` (`a[aria-current]`) | 머리띠와 내비                                                                                                                                                |
+| `.sc-btn` (+ `--accent` `--secondary` `--sm` `--block`, `disabled`)                                    | 버튼. 기본은 ink 바탕                                                                                                                                        |
+| `.sc-field` > `.sc-field-label` + `.sc-input` + `.sc-field-hint`/`.sc-field-error`                     | 입력. 오류는 `aria-invalid="true"` 또는 `.sc-field--error`                                                                                                   |
+| `.sc-list` > `li` (`.sc-list-title`, `.sc-list-meta`)                                                  | hairline 목록                                                                                                                                                |
+| `.sc-alert` (+ `--error`), `.sc-alert-title`                                                           | 알림. 안내는 `role="status"`, 오류는 `role="alert"`                                                                                                          |
+| `.sc-btn-social.sc-btn-google`, `.sc-btn-social.sc-btn-kakao`                                          | 소셜 로그인 버튼                                                                                                                                             |
+| `.sc-visually-hidden`                                                                                  | 화면 밖 텍스트                                                                                                                                               |
+| `.sc-prose` (+ `.sc-prose-gallery`, `.sc-prose-callout`(`data-kind="warning"`), `.sc-prose-cover`)     | 본문 타이포그래피(v0.5.0). 이미지는 원본 비율·잘림 없음. 표는 `.sc-prose-table-scroll`로 감싼다, 콜아웃 제목은 `.sc-prose-callout-kind` + `<strong>`(v0.6.0) |
 
 ### 소셜 로그인 버튼
 
@@ -74,6 +75,7 @@ echo "${TAG}" > "${DEST}/VERSION"
 ### 글꼴
 
 - `dist/sandcorp.css`는 글꼴 파일을 담지 않는다. Pretendard 동적 서브셋은 woff2가 수백 개라 `dist/fonts/`로 커밋하기에 너무 크다(결정).
+- 대체 face(`Pretendard Fallback`·`… Apple`·`… Win`·`JetBrains Mono Fallback`)는 `local()`만 쓰므로 dist에 들어 있고 `--font-sans`·`--font-mono`가 품는다. 글꼴이 늦게 와도 줄 폭이 거의 안 변한다(v0.6.0).
 - Vite 앱: `sandcorp-design/fonts.css`가 npm `pretendard`·`@fontsource-variable/jetbrains-mono`를 import해 번들한다.
 - Django 앱: 글꼴을 따로 싣지 않으면 `--font-sans` 스택이 시스템 한글 글꼴(Apple SD Gothic Neo, Malgun Gothic)로 떨어진다. 꼭 필요하면 앱이 `pretendard`(npm)의 `dist/web/variable/woff2-dynamic-subset/`와 JetBrains Mono 파일을 자기 static에 두고 `@font-face`를 쓴다. 필요가 생기면 이 저장소에 `dist/fonts/` 서브셋을 더하는 티켓을 만든다.
 

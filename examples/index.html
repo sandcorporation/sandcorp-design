@@ -402,6 +402,30 @@
           >
         </div>
       </section>
+      <section class="sc-section" id="font-fallback">
+        <p class="sc-label">Font fallback</p>
+        <p style="margin-top: 1rem">
+          글꼴 파일이 없어도 대체 face만으로 줄 폭이 정해진다. 아래 두 줄은 같은 문장이며, 실제
+          Pretendard가 오면 폭이 같아야 한다(<code>scripts</code> 밖 측정: PR 본문).
+        </p>
+        <p
+          id="fb-sans"
+          style="
+            font-family:
+              &quot;Pretendard Fallback&quot;, &quot;Pretendard Fallback Win&quot;,
+              &quot;Pretendard Fallback Apple&quot;;
+            width: max-content;
+          "
+        >
+          Sandcorp 대체 글꼴 face 측정 문장 0123456789
+        </p>
+        <p
+          id="fb-mono"
+          style="font-family: &quot;JetBrains Mono Fallback&quot;; width: max-content"
+        >
+          const fallback = 0123456789;
+        </p>
+      </section>
       <section class="sc-section">
         <p class="sc-label">Prose</p>
         <div class="sc-prose" style="margin-top: 1rem">
@@ -438,35 +462,41 @@
             <li>둘째 항목</li>
           </ul>
           <blockquote>인용은 왼쪽 2px 선과 muted 글자색이다.</blockquote>
-          <table>
-            <thead>
-              <tr>
-                <th>항목</th>
-                <th>값</th>
-                <th>비고</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>폭</td>
-                <td>68ch</td>
-                <td>--measure</td>
-              </tr>
-              <tr>
-                <td>줄간격</td>
-                <td>1.7</td>
-                <td>--leading</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="sc-prose-table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>항목</th>
+                  <th>값</th>
+                  <th>비고</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>폭</td>
+                  <td>68ch</td>
+                  <td>--measure</td>
+                </tr>
+                <tr>
+                  <td>줄간격</td>
+                  <td>1.7</td>
+                  <td>--leading</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <pre><code>.sc-prose img { object-fit: contain; }</code></pre>
           <hr />
           <div class="sc-prose-callout">
-            <p class="sc-prose-callout-title">note</p>
-            <p>콜아웃은 왼쪽 선과 모노 라벨이다.</p>
+            <p class="sc-prose-callout-title">
+              <span class="sc-prose-callout-kind">안내</span><strong>제목은 본문 글꼴</strong>
+            </p>
+            <p>콜아웃은 왼쪽 선, 모노 종류 라벨, 본문 글꼴 제목이다.</p>
           </div>
           <div class="sc-prose-callout" data-kind="warning">
-            <p class="sc-prose-callout-title">warning</p>
+            <p class="sc-prose-callout-title">
+              <span class="sc-prose-callout-kind">주의</span><strong>경고 제목</strong>
+            </p>
             <p>경고는 선과 라벨이 accent다.</p>
           </div>
           <ul class="sc-prose-gallery">
