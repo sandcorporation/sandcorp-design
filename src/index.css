@@ -1,3 +1,4 @@
 @import "./tokens.css";
+@import "./fallback.css";
 @import "./base.css";
 @import "./components.css";

@@ -45,12 +45,15 @@
   --color-kakao-text: rgba(0, 0, 0, 0.85);
 
   /* type */
+  /* the "... Fallback" families are metric-matched local fonts from fallback.css (issue 15) */
   --font-sans:
-    "Pretendard Variable", Pretendard, system-ui, -apple-system, "Apple SD Gothic Neo",
-    "Malgun Gothic", sans-serif;
+    "Pretendard Variable", Pretendard, "Pretendard Fallback", "Pretendard Fallback Apple",
+    "Pretendard Fallback Win", system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic",
+    sans-serif;
   --font-mono:
-    "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
-    monospace;
+    "JetBrains Mono Variable", "JetBrains Mono", "JetBrains Mono Fallback", "Pretendard Variable",
+    Pretendard, "Pretendard Fallback", "Pretendard Fallback Apple", "Pretendard Fallback Win",
+    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --text-display: clamp(3rem, 8vw, 8rem);
   --text-hero: clamp(2rem, 4.5vw, 3.5rem);
   --text-h2: clamp(1.75rem, 3.6vw, 2.75rem);

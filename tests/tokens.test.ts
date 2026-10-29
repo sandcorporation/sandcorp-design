@@ -203,3 +203,48 @@ describe("prose image rule (portfolio issue 149)", () => {
     }
   });
 });
+
+describe("font fallback faces (issue 15)", () => {
+  const dist = readFileSync(join(ROOT, "dist", "sandcorp.css"), "utf8");
+  const families = [
+    "Pretendard Fallback",
+    "Pretendard Fallback Apple",
+    "Pretendard Fallback Win",
+    "JetBrains Mono Fallback",
+  ];
+
+  it.each(families)("dist defines @font-face %s with local() sources only", (family) => {
+    const faces = [...dist.matchAll(/@font-face\s*\{([^}]*)\}/g)]
+      .map((m) => m[1] ?? "")
+      .filter((body) => body.startsWith(`font-family:${family};`));
+    expect(faces.length).toBeGreaterThan(0);
+    for (const body of faces) {
+      expect(body).toMatch(/size-adjust/);
+      expect(body).toMatch(/local\(/);
+      expect(body).not.toMatch(/url\(/);
+    }
+  });
+
+  it("--font-sans and --font-mono carry the fallback families", () => {
+    for (const name of ["font-sans", "font-mono"]) {
+      const stack = new RegExp(`--${name}:([^;]*);`).exec(dist)?.[1] ?? "";
+      for (const family of families.slice(0, 3)) expect(stack, name).toContain(family);
+    }
+    expect(/--font-mono:([^;]*);/.exec(dist)?.[1]).toContain("JetBrains Mono Fallback");
+  });
+});
+
+describe("prose long words and tables (issue 15)", () => {
+  const css = (sources[join(SRC, "components.css")] ?? "").replace(/\/\*[\s\S]*?\*\//g, "");
+
+  it(".sc-prose wraps with break-word, never anywhere (anywhere narrows table columns)", () => {
+    const body = /\.sc-prose\s*\{([^}]*)\}/.exec(css)?.[1] ?? "";
+    expect(body).toMatch(/overflow-wrap:\s*break-word/);
+    expect(css).not.toMatch(/overflow-wrap:\s*anywhere/);
+  });
+
+  it("tables scroll in .sc-prose-table-scroll and stay real tables", () => {
+    expect(/\.sc-prose-table-scroll\s*\{([^}]*)\}/.exec(css)?.[1]).toMatch(/overflow-x:\s*auto/);
+    expect(/\.sc-prose table\s*\{([^}]*)\}/.exec(css)?.[1]).not.toMatch(/display:\s*block/);
+  });
+});

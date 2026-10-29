@@ -1,0 +1,119 @@
+/*
+ * Metric-matched fallback faces. While Pretendard / JetBrains Mono load, the browser paints with a
+ * local font; these faces size that local font like the web font, so the swap moves nothing.
+ * They hold only local() sources (no font files), so they ship inside dist/sandcorp.css.
+ * Origin: portfolio (issues 133, 135) and Foresight (issues 98, 100); merged in issue 15.
+ *
+ * Measured from the font files with fontTools. Pretendard: unitsPerEm 2048, hhea ascent 1950,
+ * descent 494, lineGap 0, so ascent 95.2% / descent 24.1%. The overrides apply before size-adjust
+ * scales the face, so ascent/descent-override = Pretendard value / size-adjust.
+ *   Latin (mean advance of an English sample + digits, em): Pretendard 400 = 0.4661, 700 = 0.4900;
+ *     Arial / Liberation Sans 400 = 0.4581, 700 = 0.4915 -> size-adjust 101.8% / 99.7%. Foresight
+ *     measured only wght 400 (0.4956 / 0.4983 = 99.46%) with a different sample; the two-weight
+ *     numbers are kept because they cover bold and both samples differ by under 2.4%.
+ *   Hangul: every Pretendard syllable advances 1770/2048 = 0.8643em. Malgun Gothic 1.000em ->
+ *     86.4% (86.43% measured); Apple SD Gothic Neo 0.865em -> 99.92%; Noto CJK KR 1em -> 86.4%.
+ *     The Apple and Win faces are separate families placed after "Pretendard Fallback" in the
+ *     stack, so each platform's local() font gets its own numbers. Apple/Win numbers are
+ *     Foresight's unrounded ones (portfolio rounded 99.92% to 100%).
+ *   JetBrains Mono: advance 0.6em, ascent 1.02, descent 0.3; the local mono fonts also advance 0.6em.
+ * Weight 400 face covers 100-599, the 700 face 600-900; separate faces avoid synthesized bold.
+ */
+@font-face {
+  font-family: "Pretendard Fallback";
+  src:
+    local("Arial"), local("ArialMT"), local("Liberation Sans"), local("Arimo"), local("Helvetica");
+  font-weight: 100 599;
+  size-adjust: 101.8%;
+  ascent-override: 93.5%;
+  descent-override: 23.7%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback";
+  src:
+    local("Arial Bold"), local("Arial-BoldMT"), local("Liberation Sans Bold"), local("Arimo Bold"),
+    local("Helvetica Bold");
+  font-weight: 600 900;
+  size-adjust: 99.7%;
+  ascent-override: 95.5%;
+  descent-override: 24.2%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback";
+  src: local("Noto Sans KR"), local("Noto Sans CJK KR"), local("Nanum Gothic");
+  font-weight: 100 599;
+  unicode-range: U+1100-11ff, U+3130-318f, U+a960-a97f, U+ac00-d7af, U+d7b0-d7ff;
+  size-adjust: 86.4%;
+  ascent-override: 110.2%;
+  descent-override: 27.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback";
+  src: local("Noto Sans KR Bold"), local("Noto Sans CJK KR Bold"), local("Nanum Gothic Bold");
+  font-weight: 600 900;
+  unicode-range: U+1100-11ff, U+3130-318f, U+a960-a97f, U+ac00-d7af, U+d7b0-d7ff;
+  size-adjust: 86.4%;
+  ascent-override: 110.2%;
+  descent-override: 27.9%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback Apple";
+  src: local("Apple SD Gothic Neo"), local("AppleSDGothicNeo-Regular");
+  font-weight: 100 599;
+  unicode-range: U+1100-11ff, U+3130-318f, U+a960-a97f, U+ac00-d7af, U+d7b0-d7ff;
+  size-adjust: 99.92%;
+  ascent-override: 95.28%;
+  descent-override: 24.14%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback Apple";
+  src: local("Apple SD Gothic Neo Bold"), local("AppleSDGothicNeo-Bold");
+  font-weight: 600 900;
+  unicode-range: U+1100-11ff, U+3130-318f, U+a960-a97f, U+ac00-d7af, U+d7b0-d7ff;
+  size-adjust: 99.92%;
+  ascent-override: 95.28%;
+  descent-override: 24.14%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback Win";
+  src: local("Malgun Gothic"), local("MalgunGothic");
+  font-weight: 100 599;
+  unicode-range: U+1100-11ff, U+3130-318f, U+a960-a97f, U+ac00-d7af, U+d7b0-d7ff;
+  size-adjust: 86.43%;
+  ascent-override: 110.16%;
+  descent-override: 27.91%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Pretendard Fallback Win";
+  src: local("Malgun Gothic Bold"), local("MalgunGothic-Bold");
+  font-weight: 600 900;
+  unicode-range: U+1100-11ff, U+3130-318f, U+a960-a97f, U+ac00-d7af, U+d7b0-d7ff;
+  size-adjust: 86.43%;
+  ascent-override: 110.16%;
+  descent-override: 27.91%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Fallback";
+  src: local("Menlo"), local("DejaVu Sans Mono"), local("Liberation Mono"), local("Courier New");
+  font-weight: 100 900;
+  size-adjust: 100%;
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+}
