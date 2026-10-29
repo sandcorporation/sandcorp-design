@@ -403,6 +403,95 @@
         </div>
       </section>
       <section class="sc-section">
+        <p class="sc-label">Prose</p>
+        <div class="sc-prose" style="margin-top: 1rem">
+          <h2>긴 글의 제목</h2>
+          <p>
+            본문 문단이다. <strong>강조</strong>와 <a href="#">링크</a>, 인라인 <code>code</code>가
+            섞인다. 줄 길이는 <code>--measure</code>(68ch)로 제한된다.
+          </p>
+          <h3>세로 이미지와 가로 이미지</h3>
+          <figure>
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='900'%3E%3Crect width='400' height='900' fill='%235b6472'/%3E%3Cpath d='M0 0L400 900M400 0L0 900' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+              alt="세로 400×900"
+            />
+            <figcaption>세로 원본(400×900): 80vh를 넘지 않고 잘리지 않는다.</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='600'%3E%3Crect width='1600' height='600' fill='%231e3a8a'/%3E%3Cpath d='M0 0L1600 600M1600 0L0 600' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+              alt="가로 1600×600"
+            />
+            <figcaption>가로 원본(1600×600): 본문 폭에 맞춰 줄고 비율을 유지한다.</figcaption>
+          </figure>
+          <figure>
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80'%3E%3Crect width='120' height='80' fill='%231d6650'/%3E%3Cpath d='M0 0L120 80M120 0L0 80' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+              alt="작은 120×80"
+            />
+            <figcaption>작은 원본(120×80): 늘리지 않는다.</figcaption>
+          </figure>
+          <h4>목록·인용·표</h4>
+          <ul>
+            <li>첫째 항목</li>
+            <li>둘째 항목</li>
+          </ul>
+          <blockquote>인용은 왼쪽 2px 선과 muted 글자색이다.</blockquote>
+          <table>
+            <thead>
+              <tr>
+                <th>항목</th>
+                <th>값</th>
+                <th>비고</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>폭</td>
+                <td>68ch</td>
+                <td>--measure</td>
+              </tr>
+              <tr>
+                <td>줄간격</td>
+                <td>1.7</td>
+                <td>--leading</td>
+              </tr>
+            </tbody>
+          </table>
+          <pre><code>.sc-prose img { object-fit: contain; }</code></pre>
+          <hr />
+          <div class="sc-prose-callout">
+            <p class="sc-prose-callout-title">note</p>
+            <p>콜아웃은 왼쪽 선과 모노 라벨이다.</p>
+          </div>
+          <div class="sc-prose-callout" data-kind="warning">
+            <p class="sc-prose-callout-title">warning</p>
+            <p>경고는 선과 라벨이 accent다.</p>
+          </div>
+          <ul class="sc-prose-gallery">
+            <li>
+              <figure>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='640' height='360' fill='%232f5586'/%3E%3Cpath d='M0 0L640 360M640 0L0 360' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+                  alt="갤러리 1"
+                />
+                <figcaption>갤러리 1: 한 열, 이미지 아래 캡션.</figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure>
+                <img
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Crect width='300' height='300' fill='%238a6214'/%3E%3Cpath d='M0 0L300 300M300 0L0 300' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+                  alt="갤러리 2"
+                />
+                <figcaption>갤러리 2</figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="sc-section">
         <p class="sc-label">Logo &amp; icons</p>
         <p
           style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; margin-top: 1rem"
