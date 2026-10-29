@@ -363,3 +363,233 @@ a.sc-list-title:hover {
 .sc-btn-social:focus-visible {
   outline-offset: 3px;
 }
+
+/* Prose: body typography for articles and blocks. Origin: portfolio .prose (images follow
+   portfolio issue 149: original ratio, never cropped, never upscaled). Block-level
+   children are spaced by their own margins; wrap the content, not the page. */
+.sc-prose {
+  max-width: var(--measure);
+  color: var(--color-text);
+  font-size: var(--text-base);
+  line-height: var(--leading);
+  overflow-wrap: anywhere;
+}
+
+.sc-prose > :first-child {
+  margin-top: 0;
+}
+
+.sc-prose > :last-child {
+  margin-bottom: 0;
+}
+
+.sc-prose h2,
+.sc-prose h3,
+.sc-prose h4 {
+  color: var(--color-ink);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.sc-prose h2 {
+  margin: var(--space-7) 0 var(--space-3);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-line);
+  font-size: var(--text-xl);
+}
+
+.sc-prose h3 {
+  margin: var(--space-6) 0 var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: 600;
+}
+
+.sc-prose h4 {
+  margin: var(--space-5) 0 var(--space-2);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.sc-prose p {
+  margin: var(--space-3) 0;
+}
+
+.sc-prose strong {
+  color: var(--color-ink);
+  font-weight: 650;
+}
+
+.sc-prose a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.sc-prose a:hover {
+  color: var(--color-accent);
+}
+
+.sc-prose ul,
+.sc-prose ol {
+  padding-left: var(--space-5);
+}
+
+.sc-prose li {
+  margin: var(--space-2) 0;
+}
+
+.sc-prose li::marker {
+  color: var(--color-muted);
+}
+
+.sc-prose blockquote {
+  margin: var(--space-4) 0;
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-line-strong);
+  color: var(--color-muted);
+}
+
+.sc-prose hr {
+  margin: var(--space-6) 0;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.sc-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-tint);
+  padding: 0.1em 0.3em;
+}
+
+.sc-prose pre {
+  margin: var(--space-4) 0;
+  background: var(--color-tint);
+  padding: var(--space-3) var(--space-4);
+  overflow-x: auto;
+}
+
+.sc-prose pre code {
+  padding: 0;
+  background: none;
+}
+
+/* Wide tables scroll inside themselves instead of widening the page. */
+.sc-prose table {
+  display: block;
+  max-width: 100%;
+  margin: var(--space-4) 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.sc-prose th,
+.sc-prose td {
+  border: 0;
+  border-bottom: 1px solid var(--color-line);
+  padding: var(--space-3);
+  text-align: left;
+  vertical-align: top;
+}
+
+.sc-prose th {
+  background: var(--color-tint);
+  color: var(--color-ink);
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+/* Images: the original at its own ratio. No aspect-ratio, no cover, no width: 100%, so a
+   small original stays small and a large one shrinks to the column (and to 80vh). */
+.sc-prose img {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-tint);
+}
+
+.sc-prose figure {
+  margin: var(--space-4) 0;
+}
+
+.sc-prose figcaption {
+  margin-top: var(--space-2);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+/* Gallery: one image per row at its own size, caption below. */
+.sc-prose-gallery,
+.sc-prose ul.sc-prose-gallery {
+  list-style: none;
+  margin: var(--space-5) 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+.sc-prose-gallery li,
+.sc-prose .sc-prose-gallery li {
+  margin: 0;
+}
+
+.sc-prose-gallery figure {
+  margin: 0;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Callout: 2px rule on the left; data-kind="warning" turns the rule accent. */
+.sc-prose-callout {
+  margin: var(--space-5) 0;
+  padding: var(--space-1) 0 var(--space-1) var(--space-4);
+  border-left: 2px solid var(--color-line-strong);
+}
+
+.sc-prose-callout[data-kind="warning"] {
+  border-left-color: var(--color-accent);
+}
+
+.sc-prose-callout > :first-child {
+  margin-top: 0;
+}
+
+.sc-prose-callout > :last-child {
+  margin-bottom: 0;
+}
+
+.sc-prose-callout-title {
+  margin: 0 0 var(--space-1);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sc-prose-callout[data-kind="warning"] .sc-prose-callout-title {
+  color: var(--color-accent);
+}
+
+/* Cover image above a work or article: same rule as prose images. */
+.sc-prose-cover {
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-tint);
+  margin-bottom: var(--space-7);
+}

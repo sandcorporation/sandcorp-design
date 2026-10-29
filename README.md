@@ -9,7 +9,7 @@ React 컴포넌트는 넣지 않는다. Flow의 산업용 테마도 넣지 않�
 | -------------------- | --------------------------------------------------------------------- |
 | `src/tokens.css`     | 색·글꼴 스택·크기·간격 토큰. 원시 색은 여기에만 있다.                 |
 | `src/base.css`       | 리셋, 본문, 링크, 포커스 링                                           |
-| `src/components.css` | 클래스 컴포넌트(아래 목록)                                            |
+| `src/components.css` | 클래스 컴포넌트(`.sc-prose` 본문 포함, 아래 목록)                     |
 | `src/index.css`      | 진입점(tokens + base + components)                                    |
 | `src/fonts.css`      | Pretendard·JetBrains Mono 자체 호스팅 import (Vite용, 번들에 안 넣음) |
 | `dist/sandcorp.css`  | 위를 하나로 묶고 압축한 것. **커밋한다**(빌드 없이 쓰려는 것)         |
@@ -62,6 +62,7 @@ echo "${TAG}" > "${DEST}/VERSION"
 | `.sc-alert` (+ `--error`), `.sc-alert-title`                                                           | 알림. 안내는 `role="status"`, 오류는 `role="alert"`        |
 | `.sc-btn-social.sc-btn-google`, `.sc-btn-social.sc-btn-kakao`                                          | 소셜 로그인 버튼                                           |
 | `.sc-visually-hidden`                                                                                  | 화면 밖 텍스트                                             |
+| `.sc-prose` (+ `.sc-prose-gallery`, `.sc-prose-callout`(`data-kind="warning"`), `.sc-prose-cover`)     | 본문 타이포그래피(v0.5.0). 이미지는 원본 비율·잘림 없음    |
 
 ### 소셜 로그인 버튼
 

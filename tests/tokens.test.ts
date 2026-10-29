@@ -169,3 +169,37 @@ describe("dist", () => {
     expect(dist).toMatch(/--color-accent:\s*#1e3a8a/);
   });
 });
+
+describe.each(["light", "dark"] as const)("prose (%s)", (scheme) => {
+  const t = { ...tokens("light"), ...tokens(scheme) };
+  const get = (name: string) => t[name] ?? "";
+
+  it("prose text is >= 4.5:1 on canvas and on the code/table tint", () => {
+    for (const fg of ["color-text", "color-ink", "color-muted", "color-accent"]) {
+      expect(contrast(get(fg), get("color-canvas")), `${fg} on canvas`).toBeGreaterThanOrEqual(4.5);
+    }
+    for (const fg of ["color-text", "color-ink", "color-muted"]) {
+      expect(contrast(get(fg), get("color-tint")), `${fg} on tint`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+});
+
+describe("prose image rule (portfolio issue 149)", () => {
+  // Original ratio, never cropped, never stretched: no fixed ratio, no cover, no width: 100%.
+  const css = (sources[join(SRC, "components.css")] ?? "").replace(/\/\*[\s\S]*?\*\//g, "");
+  const imageRules = [...css.matchAll(/([^{}]*\.sc-prose[^{}]*)\{([^}]*)\}/g)].filter(([, sel]) =>
+    /img|figure|cover|gallery/.test(sel ?? ""),
+  );
+
+  it("finds the image rules", () => {
+    expect(imageRules.length).toBeGreaterThan(0);
+  });
+
+  it(".sc-prose image rules have no aspect-ratio, object-fit: cover or width: 100%", () => {
+    for (const [, sel, body] of imageRules) {
+      expect(body, sel).not.toMatch(/aspect-ratio/);
+      expect(body, sel).not.toMatch(/object-fit:\s*cover/);
+      expect(body, sel).not.toMatch(/(^|[;\s])width:\s*100%/);
+    }
+  });
+});
