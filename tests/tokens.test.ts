@@ -240,7 +240,17 @@ describe("prose long words and tables (issue 15)", () => {
   it(".sc-prose wraps with break-word, never anywhere (anywhere narrows table columns)", () => {
     const body = /\.sc-prose\s*\{([^}]*)\}/.exec(css)?.[1] ?? "";
     expect(body).toMatch(/overflow-wrap:\s*break-word/);
-    expect(css).not.toMatch(/overflow-wrap:\s*anywhere/);
+    // anywhere is allowed only for a table with no wrapper (issue 17), which scrolls itself
+    const rest = css.replace(/\.sc-prose table:not\([^)]*\)\s*\{[^}]*\}/, "");
+    expect(rest).not.toMatch(/overflow-wrap:\s*anywhere/);
+  });
+
+  it("a table without the wrapper scrolls itself; wrapped tables stay tables (issue 17)", () => {
+    const bare =
+      /\.sc-prose table:not\(\.sc-prose-table-scroll table\)\s*\{([^}]*)\}/.exec(css)?.[1] ?? "";
+    expect(bare).toMatch(/display:\s*block/);
+    expect(bare).toMatch(/overflow-x:\s*auto/);
+    expect(/\.sc-prose table\s*\{([^}]*)\}/.exec(css)?.[1]).not.toMatch(/color:/);
   });
 
   it("tables scroll in .sc-prose-table-scroll and stay real tables", () => {
