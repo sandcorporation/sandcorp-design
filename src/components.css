@@ -488,10 +488,18 @@ a.sc-list-title:hover {
 .sc-prose table {
   width: 100%;
   border-collapse: collapse;
-  color: var(--color-ink);
   font-size: var(--text-sm);
   line-height: 1.7;
   font-variant-numeric: tabular-nums;
+}
+
+.sc-prose table:not(.sc-prose-table-scroll table) {
+  /* no wrapper (an html block): the table scrolls itself and may break long words */
+  display: block;
+  max-width: 100%;
+  margin: var(--space-4) 0;
+  overflow-x: auto;
+  overflow-wrap: anywhere;
 }
 
 .sc-prose th,
@@ -588,7 +596,7 @@ a.sc-list-title:hover {
   font-family: var(--font-mono);
   font-size: var(--text-label);
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   line-height: 1.6;
   text-transform: uppercase;
 }
