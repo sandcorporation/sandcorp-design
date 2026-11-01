@@ -78,6 +78,7 @@
   /* shape and layout */
   --radius: 2px;
   --gutter: clamp(16px, 4vw, 40px);
+  --masthead-height: 56px;
   --measure: 68ch;
   --section-gap: clamp(3rem, 8vw, 5rem);
   --rule-width: 7rem;
