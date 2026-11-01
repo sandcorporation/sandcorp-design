@@ -52,11 +52,11 @@
 
 .sc-masthead-row {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.5rem 2rem;
-  padding: 1.5rem 0 1rem;
+  gap: var(--space-4);
+  height: var(--masthead-height);
+  padding: 0;
   border-bottom: 1px solid var(--color-line-strong);
 }
 
@@ -66,9 +66,15 @@
   letter-spacing: -0.01em;
   color: var(--color-ink);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .sc-masthead-meta {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
@@ -82,8 +88,8 @@
 
 .sc-nav {
   display: flex;
-  gap: 1.75rem;
-  padding: 0.9rem 0;
+  gap: 0 var(--space-6);
+  padding: 0;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-width: none;
@@ -91,12 +97,20 @@
 }
 
 .sc-nav a {
+  padding: var(--space-3) 0;
   font-family: var(--font-mono);
   font-size: var(--text-label);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-muted);
   text-decoration: none;
+}
+
+/* 좁은 화면: 보조 글(.sc-masthead-meta)은 숨겨 로고 줄이 56px를 깨지 않게 한다 */
+@media (max-width: 767px) {
+  .sc-masthead-meta {
+    display: none;
+  }
 }
 
 .sc-nav a:hover,
