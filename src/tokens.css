@@ -22,6 +22,14 @@
   --color-text: #1f2430;
   --color-muted: #5b6472;
   --color-danger: #9b2c1f;
+  /* status (dashboard badges, meters, deltas; issue 21). Text on its tint is >= 4.5:1 */
+  --color-success: #1d6650;
+  --color-success-tint: #e2f1ea;
+  --color-warning: #7a4a00;
+  --color-warning-tint: #fbf1dc;
+  --color-danger-tint: #f8e6e3;
+  /* behind a drawer or dialog (::backdrop) */
+  --color-scrim: rgba(11, 13, 18, 0.36);
   /* accent */
   --color-accent: #1e3a8a;
   --color-accent-tint: #e3e9f6;
@@ -82,6 +90,9 @@
   --measure: 68ch;
   --section-gap: clamp(3rem, 8vw, 5rem);
   --rule-width: 7rem;
+  /* dashboard shell (issue 21) */
+  --sidenav-width: 232px;
+  --topbar-height: 56px;
 }
 
 @media screen and (prefers-color-scheme: dark) {
@@ -95,6 +106,12 @@
     --color-text: #d5dae2;
     --color-muted: #9aa3b0;
     --color-danger: #f0a090;
+    --color-success: #58b595;
+    --color-success-tint: #13261e;
+    --color-warning: #e0b25c;
+    --color-warning-tint: #2a2210;
+    --color-danger-tint: #2c1a17;
+    --color-scrim: rgba(0, 0, 0, 0.6);
     --color-accent: #8fb3ff;
     --color-accent-tint: #1c2742;
     --color-on-accent: #0b0d12;

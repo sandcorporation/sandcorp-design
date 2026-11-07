@@ -10,7 +10,8 @@ React 컴포넌트는 넣지 않는다. Flow의 산업용 테마도 넣지 않�
 | `src/tokens.css`     | 색·글꼴 스택·크기·간격 토큰. 원시 색은 여기에만 있다.                 |
 | `src/base.css`       | 리셋, 본문, 링크, 포커스 링                                           |
 | `src/components.css` | 클래스 컴포넌트(`.sc-prose` 본문 포함, 아래 목록)                     |
-| `src/index.css`      | 진입점(tokens + base + components)                                    |
+| `src/dashboard.css`  | 대시보드 요소(앱 골격·표·탭·배지·서랍·저장 막대 등, v0.8.0)           |
+| `src/index.css`      | 진입점(tokens + base + components + dashboard)                        |
 | `src/fallback.css`   | 대체 글꼴 metric `@font-face`(local() 전용, 번들에 들어감, v0.6.0)    |
 | `src/fonts.css`      | Pretendard·JetBrains Mono 자체 호스팅 import (Vite용, 번들에 안 넣음) |
 | `dist/sandcorp.css`  | 위를 하나로 묶고 압축한 것. **커밋한다**(빌드 없이 쓰려는 것)         |
@@ -79,6 +80,48 @@ echo "${TAG}" > "${DEST}/VERSION"
 - Vite 앱: `sandcorp-design/fonts.css`가 npm `pretendard`·`@fontsource-variable/jetbrains-mono`를 import해 번들한다.
 - Django 앱: 글꼴을 따로 싣지 않으면 `--font-sans` 스택이 시스템 한글 글꼴(Apple SD Gothic Neo, Malgun Gothic)로 떨어진다. 꼭 필요하면 앱이 `pretendard`(npm)의 `dist/web/variable/woff2-dynamic-subset/`와 JetBrains Mono 파일을 자기 static에 두고 `@font-face`를 쓴다. 필요가 생기면 이 저장소에 `dist/fonts/` 서브셋을 더하는 티켓을 만든다.
 
+## 대시보드 요소 (v0.8.0)
+
+관리 화면(promptlab 대시보드, flow·metrics 관리)용. 견본은 `examples/dashboard.html`(시험 목록 · 응시자 표 + 서랍 · 문제 편집 · 설정 저장 막대, `#exams`·`#results`·`#problem`·`#settings`, `?open=invite`·`?open=confirm`). 시안의 임시 이름(`.side`·`.n`·`.tile`·`.num` 등)은 쓰지 않고 아래 `sc-*`만 쓴다(모든 클래스는 `sc-` 접두사라 `.num`은 `.sc-num`).
+
+**토큰**: 상태 색 `--color-success`·`--color-success-tint`·`--color-warning`·`--color-warning-tint`·`--color-danger-tint`(기존 `--color-danger`와 짝, 라이트·다크 모두 글자↔tint 4.5:1 이상), 배경 막 `--color-scrim`, 치수 `--sidenav-width`(232px)·`--topbar-height`(56px).
+
+| 클래스                                                                                                                         | 용도                                                                                                                                                                 |
+| ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.sc-app` > `.sc-sidenav` + `.sc-app-main` > `.sc-topbar` + `.sc-app-page`                                                     | 앱 골격. 본문 14px. 1180px 아래 메뉴는 아이콘만(이름은 화면 밖으로 숨겨 읽기 프로그램엔 남는다, 링크에 `title`을 달 것), 720px 아래 위 가로 막대                     |
+| `.sc-sidenav-org` (`.sc-sidenav-mark`, `.sc-sidenav-org-text` > `small`)                                                       | 조직 전환 단추(`<button aria-haspopup="menu">`). 메뉴 자체는 소비자 몫                                                                                               |
+| `.sc-sidenav-heading`, `.sc-sidenav-item` (`svg` + `.sc-sidenav-label` + `.sc-sidenav-count`)                                  | 묶음 제목(mono 대문자), 항목. 현재 항목은 `aria-current="page"` → accent tint + 왼쪽 2px 선(휴대폰은 아래 선)                                                        |
+| `.sc-topbar` > `nav` > `ol.sc-topbar-crumbs` + `.sc-topbar-account` (`.sc-topbar-avatar`, `.sc-topbar-account-text` > `small`) | 이동 경로(마지막은 `aria-current="page"`, 길면 말줄임)와 계정 메뉴 단추(`aria-haspopup="menu"`·`aria-expanded`). 로그아웃은 그 메뉴 안에 둔다                        |
+| `.sc-page-head` (`.sc-page-head-title`, `.sc-page-head-sub`, `.sc-page-head-actions`)                                          | 페이지 머리: 제목(+ 배지), 보조 줄, 주 버튼. 아래 `--color-line-strong` 선                                                                                           |
+| `nav.sc-tabs` > `a[aria-current="page"]` (+ `.sc-tabs-count`)                                                                  | 링크 탭(페이지 이동). 좁으면 가로로 민다                                                                                                                             |
+| `.sc-panel` (`.sc-panel-section`, `.sc-panel-title`), `.sc-split` > … + `.sc-split-rail`                                       | 가는 선 상자, 편집 칸 + 오른쪽 380px 고정(sticky) 점검 패널. 1280px 아래 한 줄로 쌓인다                                                                              |
+| `.sc-table-scroll` > `table.sc-table`                                                                                          | 표. 머리 mono 대문자 11px + 굵은 선, 숫자 칸 `.sc-num`(오른쪽·tabular-nums), 한국어는 낱말 단위로 줄바꿈하고 좁으면 감싸개가 가로 스크롤                             |
+| `tr.sc-table-row-link`, `.sc-table-sub`                                                                                        | 누르는 줄(hover paper). 첫 칸에 진짜 `<a>`를 두고(키보드) 줄 클릭은 JS로 그 링크를 누른다. `.sc-table-sub`는 칸 안 보조 줄                                           |
+| `tr.sc-table-row--open` + `tr.sc-table-detail` > `td[colspan]` > `.sc-table-detail-panel`                                      | 줄 펼침(편집 행). 여는 단추에 `aria-expanded`·`aria-controls`. `tr[aria-selected="true"]`도 accent tint                                                              |
+| `.sc-toolbar` (`.sc-toolbar-chips`, `label.sc-toolbar-search` > `svg` + `input`)                                               | 거름 칩 + 찾기 칸. 찾기 칸에 `.sc-visually-hidden` 이름을 둔다                                                                                                       |
+| `button.sc-chip[aria-pressed]` (+ `.sc-chip-count`)                                                                            | 거름 칩. 켜짐(`aria-pressed="true"`)은 ink 바탕                                                                                                                      |
+| `dl.sc-stat` > `.sc-stat-item` > `dt.sc-stat-label` + `dd.sc-stat-value` (+ `dd.sc-stat-note`)                                 | 요약 타일 줄. 가는 선으로 나뉘고 폭에 따라 줄을 바꾼다                                                                                                               |
+| `.sc-meter` (+ `--lg`, `--success` `--warning` `--danger`) > `.sc-meter-fill` + `.sc-meter-mark`                               | 진행 막대. 값은 `style="--sc-value: 67%"`, 기준선·문턱 표시는 `.sc-meter-mark`의 `--sc-at`. `role="meter"`(또는 `progressbar`)와 `aria-valuenow`·`aria-label`을 단다 |
+| `.sc-badge` + `--info` `--success` `--warning` `--danger` `--neutral`                                                          | 상태 배지. `.sc-tone-success`·`-warning`·`-danger`는 글자 색만(증감·통과/실패)                                                                                       |
+| `dialog.sc-drawer` > `.sc-drawer-head` (`.sc-drawer-title`, `.sc-icon-btn`) + `.sc-drawer-body` + `.sc-drawer-foot`            | 오른쪽 서랍(440px, 휴대폰은 전체 폭). 배경 막은 `::backdrop`                                                                                                         |
+| `dialog.sc-dialog` > `.sc-dialog-body` (`.sc-dialog-title`) + `.sc-dialog-foot`                                                | 확인 상자. 지우기·보관처럼 되돌리기 어려운 동작은 `.sc-btn--danger`                                                                                                  |
+| `.sc-savebar` (`.sc-savebar-text`, `.sc-savebar-actions`)                                                                      | 「저장하지 않은 변경 n개」 아래 고정 막대. `.sc-app-page`의 마지막 자식으로 두면 페이지 폭을 채운다. 변경이 없으면 `hidden`. 글에 `role="status"`                    |
+| `select.sc-select`                                                                                                             | 조밀한 선택(36px). 화살표는 그림 없이 `currentColor`                                                                                                                 |
+| `input[type=checkbox][role=switch].sc-toggle` (또는 `button[role=switch][aria-checked]`)                                       | 스위치. 꺼짐은 muted 바탕(3:1 이상)                                                                                                                                  |
+| `input[type=range].sc-slider` (+ `--split`)                                                                                    | 슬라이더. 채움은 `--sc-value`(JS가 `input`마다 갱신). `--split`은 비율(A : B)로 나머지를 `--color-cat-it`로 칠한다                                                   |
+| `.sc-token-input` > `.sc-token` (+ `--invalid`, `.sc-token-remove`) + `input.sc-token-input-field`                             | 이메일 여러 개. 잘못된 토큰은 `--invalid`(danger). 지우기 단추에 `aria-label`. 나누기(Enter·쉼표)·검증은 소비자 JS                                                   |
+| `.sc-btn--danger`, `.sc-icon-btn`                                                                                              | 위험 동작 버튼, 아이콘만 있는 단추(닫기 ✕, `aria-label` 필수)                                                                                                        |
+
+### 키보드와 겹침 (소비자 몫)
+
+CSS만 싣는다. 동작은 앱이 이렇게 붙인다(견본 `examples/dashboard.html` 끝의 스크립트가 예).
+
+- **서랍·확인 상자**: 네이티브 `<dialog>`를 `showModal()`로 연다. 그러면 브라우저가 포커스를 상자 안 첫 요소(또는 `autofocus`)로 옮기고, 밖으로 나가지 않게 가두고, **Esc로 닫고**, 닫으면 연 단추로 포커스를 돌려준다. 닫기 단추는 `<form method="dialog">` 안에 두면 JS가 필요 없다. 배경 막을 눌러 닫으려면 `dialog`의 `click`에서 `e.target === dialog`일 때 `close()`. 확인 상자는 안전한 쪽(취소)에 `autofocus`.
+- **탭**: `.sc-tabs`는 링크 탭이라 Tab 키로 차례로 간다(화살표 이동이 필요 없다). 한 페이지 안에서 패널을 바꾸는 탭이 필요하면 `role="tablist"`/`tab`/`tabpanel`과 좌우 화살표·`aria-selected`를 앱이 붙인다(스타일은 `aria-current`와 같게 맞출 것).
+- **줄 펼침**: 여는 단추에 `aria-expanded`, `aria-controls="<펼친 tr id>"`. 펼친 뒤 첫 입력으로 포커스를 옮기고, Esc로 접으면 단추로 돌려준다.
+- **칩·스위치**: 칩은 `<button aria-pressed>`, 스위치는 `role="switch"` 체크박스 — 스페이스로 바뀐다.
+- **저장 막대**: 떠날 때 `beforeunload`로 막는 것은 앱이 정한다.
+
 ## 로고·아이콘 (v0.4.0)
 
 `assets/`의 SVG·PNG·ICO. 원본 모양은 portfolio의 마크(정사각형 안의 모래언덕 둘, 32×32, rx 2)를 그대로 옮겼다.
@@ -108,4 +151,4 @@ semver 태그(`vX.Y.Z`). 토큰 이름을 바꾸거나 지우면 **major**, 토�
 ## 개발
 
 `CLAUDE.md` 참고. `pnpm check` = 빌드 → 아이콘 생성 → dist·assets 변경 없음 확인 → 시험 → 포맷 검사.
-`examples/index.html`은 `dist/sandcorp.css`만 붙인 견본이다.
+`examples/index.html`·`examples/dashboard.html`은 `dist/sandcorp.css`만 붙인 견본이다.
