@@ -1,0 +1,30 @@
+# PR 검사: `pnpm check`(빌드, dist·assets 최신 확인, 시험, 린트). GitHub 호스팅 실행기만, 비밀값 없음.
+# 보안 규칙: pull_request_target 금지, self-hosted 금지, 최소 권한.
+name: pr-check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: pnpm 설치
+        run: npm install -g pnpm@11.25.0
+      - run: pnpm install --frozen-lockfile
+      - name: 검사 (빌드 → icons → dist·assets diff → 시험 → 린트)
+        run: pnpm check
